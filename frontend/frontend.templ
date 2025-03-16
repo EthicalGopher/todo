@@ -1,0 +1,23 @@
+package frontend
+
+import "strconv"
+
+templ Todo(tasks []string) {
+    if len(tasks) == 0 {
+        <div>No todos yet!</div>
+    } else {
+        for index, task := range tasks {
+            if task != "" {
+                <div class="todo-item">
+                    <input type="checkbox" id={"todo-" + strconv.Itoa(index)} class="todo-checkbox"/>
+                    <label for={"todo-" + strconv.Itoa(index)} class="todo-text">{ task }</label>
+                    <div class="todo-actions">
+                        <button hx-delete={"http://localhost:3000/delete?index=" + strconv.Itoa(index)}  >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            }
+        }
+    }
+}

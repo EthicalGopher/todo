@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Todo</title>
+    <link rel="stylesheet" href="src/style.css">
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+</head>
+<body>
+    
+    <div id="todo-app">
+        <div id="new-todo">
+            <form  hx-post="http://localhost:3000/add" hx-swap="innerHTML" hx-target="#todo-list"    hx-on::after-request="if(event.detail.successful) {this.reset();htmx.trigger('#todo-list','refresh')}" >
+                <input type="text" id="todo-input" placeholder="Add a new todo..." name="task">
+                <button type="submit">+</button>
+            </form>
+        </div>
+        <div id="todo-list" hx-get="http://localhost:3000/render" hx-swap="innerHTML" hx-trigger="refresh"  hx-target="#todo-list" >
+          Add your task....
+        </div>
+    </div>
+</body>
+</html>
